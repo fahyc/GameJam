@@ -13,6 +13,10 @@ public class Turret : MonoBehaviour {
 	Transform target;
 	Vector3 targetLastPos = Vector3.zero;
 
+	public GameObject firingParticles;
+	public float particlesDuration;
+	public float particleTimer;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -24,7 +28,12 @@ public class Turret : MonoBehaviour {
 		{
 			getTarget();
 		}
-
+		particleTimer -= Time.deltaTime;
+		//timer -= Time.deltaTime;
+		if(particleTimer < 0 && firingParticles)
+		{
+			firingParticles.SetActive(false);
+		}
 		if (target)
 		{
 
@@ -43,6 +52,11 @@ public class Turret : MonoBehaviour {
 			if(timer >= timeBetweenShots)
 			{
 				Projectile temp = Instantiate(projectile,transform.position,transform.rotation);
+				if (firingParticles)
+				{
+					firingParticles.SetActive(true);
+					particleTimer = particlesDuration;
+				}
 				timer = 0;
 			}
 			timer += Time.deltaTime;

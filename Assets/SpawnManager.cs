@@ -38,7 +38,8 @@ public class SpawnManager : MonoBehaviour {
 			money -= costs[index];
 			//print("Spawning");*
 			GameObject temp = Instantiate(turrets[index]);
-			temp.transform.position = player.position;
+			temp.transform.position = new Vector3(player.position.x,0, player.position.z);
+			
 		}
 	}
 

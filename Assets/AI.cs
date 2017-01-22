@@ -17,8 +17,29 @@ public class AI : MonoBehaviour {
 	{
 		public PathFollower(List<Vector3>path)
 		{
+			for(int i = 0; i < path.Count; i++)
+			{
+				//int equalCount = 0;
+				for(int j = 0; j < path.Count; j++)
+				{
+					if(path[i] == path[j] && i != j)
+					{
+						path.RemoveAt(j);
+					}
+				}
+			}
 			currentPath = path;
+			if(path.Count < 2)
+			{
+				currentLen = 1;
+				pathProgress = 1;
+				return;
+			}
 			currentLen = (path[0] - path[1]).magnitude;
+			if(currentLen == 0)
+			{
+				Debug.LogWarning("currentlen is zero");
+			}
 		}
 		public List<Vector3> currentPath;
 
