@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class AI : MonoBehaviour {
 
-	public Health target;
+	//public Health target;
 
 	public float speed;
 
 	PathFollower pathFollower;
 
-	int walls = 0;
 
-	public LineRenderer laser;
+	List<GameObject> walls = new List<GameObject>();
+
+	//public LineRenderer laser;
 
 	public class PathFollower
 	{
@@ -97,7 +98,7 @@ public class AI : MonoBehaviour {
 			else
 			{
 				//for(int i = )
-				if (walls == 0)
+				if (!hittingWall())
 				{
 					transform.position = pathFollower.step(transform.position, speed);
 				}
@@ -129,17 +130,31 @@ public class AI : MonoBehaviour {
 		print("Attacking");*/
 	}
 
-	void OnCollisionEnter(Collider col)
+	bool hittingWall()
+	{
+	//	int count = 0;
+		for(int i = 0; i < walls.Count; i++)
+		{
+			if (walls[i])
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.CompareTag("Wall")) {
-			walls++;
+			walls.Add(col.gameObject);
 		}
 	}
 	void OnTriggerExit(Collider col)
 	{
+		print("Exiting " + col.gameObject);
 		if (col.gameObject.CompareTag("Wall"))
 		{
-			walls--;
+			walls.Add(col.gameObject);
 		}
 	}
 }
