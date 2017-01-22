@@ -13,6 +13,8 @@ public class AI : MonoBehaviour {
 
 	List<GameObject> walls = new List<GameObject>();
 
+	Vector3 lastPos;
+	
 	//public LineRenderer laser;
 
 	public class PathFollower
@@ -100,6 +102,9 @@ public class AI : MonoBehaviour {
 				//for(int i = )
 				if (!hittingWall())
 				{
+					transform.rotation = Quaternion.LookRotation(transform.position - lastPos);
+
+					lastPos = transform.position;
 					transform.position = pathFollower.step(transform.position, speed);
 				}
 			}

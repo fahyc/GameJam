@@ -179,7 +179,7 @@ namespace GoMap {
 					}
 				}
 
-				if (!useLocationServices && Application.isEditor && demoLocation != DemoLocation.NoGPSTest) {
+				if (!useLocationServices && demoLocation != DemoLocation.NoGPSTest) {
 					changeLocationWASD ();
 				}
 

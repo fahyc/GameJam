@@ -15,6 +15,8 @@ public class MapModifier : MonoBehaviour {
 	public float recalculateTime;
 	public int recalculateTiles;
 
+	public float pickupSpawnChance = .01f;
+
 	Vector3 lastRecalcPoint;
 	float lastRecalcTime;
 	int unusedTiles;
@@ -22,6 +24,8 @@ public class MapModifier : MonoBehaviour {
 	Transform player;
 
 	Dijkstra paths;
+
+	public GameObject pickup;
 
 	public bool shouldRecalculate()
 	{//if we have too many tiles not in the path or if we are far enough away from the last point recalculate, but only if a certain amount of time has passed.
@@ -187,6 +191,10 @@ public class MapModifier : MonoBehaviour {
 				{
 					for(int j = 0; j < roads[i].verts.Length; j++)
 					{
+						if(Random.value < pickupSpawnChance)
+						{
+							Instantiate(pickup, roads[i].verts[j], Quaternion.identity);
+						}
 						Vector3 point = roads[i].verts[j];
 						Node n;
 						if (pathmap.ContainsKey(point))
@@ -206,6 +214,7 @@ public class MapModifier : MonoBehaviour {
 						}
 					}
 				}
+
 				continue;
 			}
 			else
