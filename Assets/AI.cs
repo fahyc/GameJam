@@ -10,6 +10,7 @@ public class AI : MonoBehaviour {
 
 	PathFollower pathFollower;
 
+	int walls = 0;
 
 	public LineRenderer laser;
 
@@ -96,7 +97,10 @@ public class AI : MonoBehaviour {
 			else
 			{
 				//for(int i = )
-				transform.position = pathFollower.step(transform.position, speed);
+				if (walls == 0)
+				{
+					transform.position = pathFollower.step(transform.position, speed);
+				}
 			}
 		}
 	}
@@ -123,5 +127,19 @@ public class AI : MonoBehaviour {
 		laser.SetPosition(1, target.transform.position);
 		
 		print("Attacking");*/
+	}
+
+	void OnCollisionEnter(Collider col)
+	{
+		if (col.gameObject.CompareTag("Wall")) {
+			walls++;
+		}
+	}
+	void OnTriggerExit(Collider col)
+	{
+		if (col.gameObject.CompareTag("Wall"))
+		{
+			walls--;
+		}
 	}
 }

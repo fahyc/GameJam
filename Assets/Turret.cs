@@ -47,7 +47,8 @@ public class Turret : MonoBehaviour {
 			}
 
 			Vector3 aimPoint = target.transform.position + ((target.transform.position - targetLastPos) / Time.deltaTime * (transform.position - target.transform.position).magnitude / projectile.speed);
-
+			//aimPoint = new Vector3(aimPoint.x, transform.position.y, aimPoint.z);
+			aimPoint.y = transform.position.y;
 			transform.rotation = Quaternion.LookRotation(aimPoint - transform.position);
 			if(timer >= timeBetweenShots)
 			{
