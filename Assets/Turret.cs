@@ -28,6 +28,15 @@ public class Turret : MonoBehaviour {
 		if (target)
 		{
 
+			if((transform.position - target.transform.position).magnitude > range)
+			{
+				getTarget();
+				if (!target)
+				{
+					return;
+				}
+			}
+
 			Vector3 aimPoint = target.transform.position + ((target.transform.position - targetLastPos) / Time.deltaTime * (transform.position - target.transform.position).magnitude / projectile.speed);
 
 			transform.rotation = Quaternion.LookRotation(aimPoint - transform.position);
@@ -59,6 +68,7 @@ public class Turret : MonoBehaviour {
 
 
 
+	
 
 	public static Transform closest(List<Transform> list,Vector3 pos)
 	{

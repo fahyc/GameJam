@@ -66,7 +66,7 @@ namespace GoMap
 				}
 				else
 				{
-					Debug.Log (completeurl);
+//					Debug.Log (completeurl);
 					var www = new WWW(completeurl);
 					yield return www;
 					if (www.error == null && www.text.Length > 0) {

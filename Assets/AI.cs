@@ -63,7 +63,8 @@ public class AI : MonoBehaviour {
 	void Update () {
 		if(pathFollower == null)
 		{
-			pathFollower = new PathFollower(MapModifier.singleton.path);
+			getPath();
+			//pathFollower = new PathFollower(MapModifier.singleton.path);
 		}
 		else
 		{
@@ -73,6 +74,7 @@ public class AI : MonoBehaviour {
 			}
 			else
 			{
+				//for(int i = )
 				transform.position = pathFollower.step(transform.position, speed);
 			}
 		}
@@ -80,7 +82,13 @@ public class AI : MonoBehaviour {
 
 	void getPath()
 	{
-		print("getting path");
+		List<Vector3> p = MapModifier.singleton.getPath(transform.position);
+		if (p != null)
+		{
+			pathFollower = new PathFollower(p);
+		}
+		//pathFollower = MapModifier.singleton
+		//print("getting path");
 	}
 
 	void Attack()

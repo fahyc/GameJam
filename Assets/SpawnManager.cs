@@ -13,6 +13,8 @@ public class SpawnManager : MonoBehaviour {
 	public GameObject[] turrets;
 	public int[] costs;
 
+	public static SpawnManager singleton;
+
 	public void SpawnTurret(int index) // GameObject turret,int price)
 	{
 		if(costs[index] > money)
@@ -25,7 +27,7 @@ public class SpawnManager : MonoBehaviour {
 			Collider[] col = Physics.OverlapSphere(player.position, turretRadius);
 			for (int i = 0; i < col.Length; i++)
 			{
-				print(col[i].gameObject);
+//				print(col[i].gameObject);
 				Turret tur = col[i].GetComponent<Turret>();
 				if (tur)
 				{
@@ -33,6 +35,7 @@ public class SpawnManager : MonoBehaviour {
 					return;
 				}
 			}
+			money -= costs[index];
 			//print("Spawning");*
 			GameObject temp = Instantiate(turrets[index]);
 			temp.transform.position = player.position;
@@ -48,12 +51,13 @@ public class SpawnManager : MonoBehaviour {
 	{
 		print("not enough money");
 	}
+
+	void Awake()
+	{
+		singleton = this;
+	}
 	/*
 	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		

@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
-		print(col.gameObject);
+//		print(col.gameObject);
 		Health h = col.gameObject.GetComponent<Health>();
 		if (h)
 		{
