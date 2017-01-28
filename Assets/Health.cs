@@ -12,6 +12,7 @@ public class Health : MonoBehaviour {
 	public void takeDamage(float amount)
 	{
 		health -= amount;
+		health = Mathf.Clamp(health, 0, maxHealth);
 		if (health <= 0)
 		{
 			if (restartGameOnDestroy)

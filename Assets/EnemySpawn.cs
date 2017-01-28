@@ -16,6 +16,9 @@ public class EnemySpawn : MonoBehaviour {
 
 	public static EnemySpawn singleton;
 
+	public float enemyMultiplier = 1;
+	public float timePower = .5f;
+
 	// Use this for initialization
 	void Awake () {
 		for (int i = 0; i < weights.Length; i++)
@@ -31,7 +34,9 @@ public class EnemySpawn : MonoBehaviour {
 		if (timer <= 0)
 		{
 			timer = timeBetweenWaves;
-			for(int i = 0; i < enemiesPerWave; i++)
+			float multiplier = GameObject.FindGameObjectsWithTag("Building").Length;// * enemyMultiplier + Mathf.Pow(Time.time,timePower);
+			print("Spawning " + ( enemiesPerWave + multiplier));
+			for(int i = 0; i < enemiesPerWave + multiplier; i++)
 			{
 				Spawn();
 			}
@@ -49,6 +54,7 @@ public class EnemySpawn : MonoBehaviour {
 				Vector2 point = Random.insideUnitCircle.normalized * spawnDistance;
 				Vector3 actual = new Vector3(point.x, 0, point.y) + transform.position;
 				Instantiate(enemies[i], actual, transform.rotation);
+				return;
 			}
 		}
 	}

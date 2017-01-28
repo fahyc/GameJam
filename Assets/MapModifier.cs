@@ -77,7 +77,7 @@ public class MapModifier : MonoBehaviour {
 			{
 				if(cur.connections.Count < 1)
 				{
-					Debug.LogWarning("Unconnected node that isn't the root!");
+//					Debug.LogWarning("Unconnected node that isn't the root!");
 					break;
 				}
 				Node next = cur.connections[0];
@@ -100,7 +100,7 @@ public class MapModifier : MonoBehaviour {
 
 		void buildPath(Vector3 player, Dictionary<Vector3, Node> graph)
 		{
-			print("Starting build path");
+//			print("Starting build path");
 			if(graph.Count < 1)
 			{
 				print("graph size 0");
@@ -277,7 +277,7 @@ public class MapModifier : MonoBehaviour {
 			lastRecalcTime = Time.time;
 			lastRecalcPoint = player.position;
 			recalculateTiles = 0;
-			print("Refreshing");
+//			print("Refreshing");
 			paths.refresh(this, player.position, pathmap);
 		}
 	}

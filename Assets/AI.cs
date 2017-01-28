@@ -102,7 +102,11 @@ public class AI : MonoBehaviour {
 				//for(int i = )
 				if (!hittingWall())
 				{
-					transform.rotation = Quaternion.LookRotation(transform.position - lastPos);
+					Vector3 look = transform.position - lastPos;
+					if (look.sqrMagnitude > 0)
+					{
+						transform.rotation = Quaternion.LookRotation(look);
+					}
 
 					lastPos = transform.position;
 					transform.position = pathFollower.step(transform.position, speed);
